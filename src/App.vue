@@ -14,7 +14,7 @@ export default {
   name: 'App',
   components: {
     Nav,
-  }
+  },
 }
 </script>
 
@@ -25,12 +25,10 @@ export default {
 
   body {
     background: #1c8ef9 !important;
-    min-height: 100vh;
-    display: flex;
-    font-weight: 400;
+    padding-top: 60px;
   }
 
-  body, html, #app, #root, .auth-wrapper {
+  #app, #root, .auth-wrapper {
     width: 100%;
     height: 100%;
   }
