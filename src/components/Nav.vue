@@ -1,11 +1,11 @@
 <template>
   <nav class="navbar navbar-expand navbar-light fixed-top bg-light">
     <div class="container">
-      <a class="navbar-brand" href="#">Home</a>
+      <router-link to="/" class="navbar-brand">Home</router-link>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Login</a>
+            <router-link to="/login" class="nav-link">Login</router-link>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Sign up</a>
