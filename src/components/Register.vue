@@ -52,6 +52,7 @@ export default {
       try {
         let response = await this.$http.post("/auth", user_params);
         console.log(response.data);
+        this.$session.activate(response.headers);
         this.$router.push('/');
       } catch (error) {
         this.errors = error.response.data.errors;

@@ -5,7 +5,9 @@ let config = {
   baseURL: process.env.apiUrl || "http://127.0.0.1:3000",
   headers: {
     'Content-Type': 'application/json',
-    // 'Authorization': `Bearer ${localStorage.token}`
+    'client':       localStorage.client,
+    'uid':          localStorage.uid,
+    'access-token': localStorage.token,
   },
 };
 
