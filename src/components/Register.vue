@@ -10,6 +10,7 @@
     <div class="form-group">
       <label>Email</label>
       <input type="email" class="form-control" v-model="email" placeholder="Email">
+      {{errors.email}}
     </div>
 
     <div class="form-group">
@@ -34,10 +35,13 @@ export default {
       email:                 '',
       password:              '',
       password_confirmation: '',
+      errors:                {}
     };
   },
   methods: {
-    register() {
+    async register() {
+      this.errors = {};
+
       const user_params = {
         name:                  this.name,
         email:                 this.email,
@@ -45,7 +49,15 @@ export default {
         password_confirmation: this.password_confirmation,
       };
 
-      console.log(user_params);
+      try {
+        let response = await this.$http.post("/auth", user_params);
+        console.log(response.data);
+        this.$router.push('/');
+      } catch (error) {
+        this.errors = error.response.data.errors;
+        console.log('Error');
+        console.log(error);
+      }
     }
   }
 }
