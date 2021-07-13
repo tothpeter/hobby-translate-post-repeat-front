@@ -1,24 +1,24 @@
 <template>
-  <form>
+  <form @submit.prevent="register">
     <h3>Register</h3>
 
     <div class="form-group">
       <label>Name</label>
-      <input type="text" class="form-control" placeholder="Name">
+      <input type="text" class="form-control" v-model="name" placeholder="Name">
     </div>
 
     <div class="form-group">
       <label>Email</label>
-      <input type="email" class="form-control" placeholder="Email">
+      <input type="email" class="form-control" v-model="email" placeholder="Email">
     </div>
 
     <div class="form-group">
       <label>Password</label>
-      <input type="password" class="form-control" placeholder="Password">
+      <input type="password" class="form-control" v-model="password" placeholder="Password">
     </div>
     <div class="form-group">
       <label>Confirm Password</label>
-      <input type="password" class="form-control" placeholder="Confirm Password">
+      <input type="password" class="form-control" v-model="password_confirmation" placeholder="Confirm Password">
     </div>
 
     <button class="btn btn-primary btn-block">Register</button>
@@ -27,7 +27,27 @@
 
 <script>
 export default {
-  name: 'Register'
+  name: 'Register',
+  data() {
+    return {
+      name:                  '',
+      email:                 '',
+      password:              '',
+      password_confirmation: '',
+    };
+  },
+  methods: {
+    register() {
+      const user_params = {
+        name:                  this.name,
+        email:                 this.email,
+        password:              this.password,
+        password_confirmation: this.password_confirmation,
+      };
+
+      console.log(user_params);
+    }
+  }
 }
 </script>
 
