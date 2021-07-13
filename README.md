@@ -1,4 +1,6 @@
-# translate-post-repeat-front
+# Translate Post Repeat for Instagram Front End
+
+This is the front end of a new world changer SAS app.
 
 ## Project setup
 ```
