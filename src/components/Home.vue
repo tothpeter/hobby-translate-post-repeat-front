@@ -4,9 +4,15 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'Home',
-  props: ['current_user'],
+  computed: {
+    ...mapGetters([
+      'current_user',
+    ])
+  },
 }
 </script>
 

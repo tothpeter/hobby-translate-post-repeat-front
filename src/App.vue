@@ -1,8 +1,8 @@
 <template>
-  <Nav :current_user="current_user" />
+  <Nav />
   <div class="auth-wrapper">
     <div class="auth-inner">
-      <router-view :current_user="current_user" />
+      <router-view />
     </div>
   </div>
 </template>
@@ -15,15 +15,10 @@ export default {
   components: {
     Nav,
   },
-  data() {
-    return {
-      current_user: null,
-    };
-  },
   async created() {
     if (this.$session.isAuthenticated()) {
       let response = await this.$http.get("/account");
-      this.current_user = response.data;
+      this.$store.dispatch('current_user', response.data);
     }
   },
 }

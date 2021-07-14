@@ -25,15 +25,22 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'Nav',
-  props: ['current_user'],
+  computed: {
+    ...mapGetters([
+      'current_user',
+    ])
+  },
   methods: {
     async logout() {
       try {
         await this.$http.delete("/auth/sign_out");
-        this.$router.push('/');
+        this.$store.dispatch('current_user', null);
         this.$session.invalidate();
+        this.$router.push('/');
       } catch (error) {
         console.log('Error', error);
       }

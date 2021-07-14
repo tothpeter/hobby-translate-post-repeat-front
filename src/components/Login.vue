@@ -34,6 +34,7 @@ export default {
 
       try {
         let response = await this.$http.post("/auth/sign_in", login_params);
+        this.$store.dispatch('current_user', response.data.data);
         this.$session.activate(response.headers);
         this.$router.push('/');
       } catch (error) {

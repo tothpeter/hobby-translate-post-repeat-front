@@ -2,7 +2,7 @@ export default {
   install: (app) => {
     app.config.globalProperties.$session = {
       isAuthenticated() {
-        return localStorage.token !== null;
+        return localStorage.token !== undefined;
       },
 
       activate(response_headers) {
