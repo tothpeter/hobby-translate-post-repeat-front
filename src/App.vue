@@ -1,8 +1,8 @@
 <template>
-  <Nav />
+  <Nav :current_user="current_user" />
   <div class="auth-wrapper">
     <div class="auth-inner">
-      <router-view />
+      <router-view :current_user="current_user" />
     </div>
   </div>
 </template>
@@ -14,6 +14,15 @@ export default {
   name: 'App',
   components: {
     Nav,
+  },
+  data() {
+    return {
+      current_user: null,
+    };
+  },
+  async created() {
+    let response = await this.$http.get("/account");
+    this.current_user = response.data;
   },
 }
 </script>

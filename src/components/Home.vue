@@ -1,10 +1,12 @@
 <template>
-  Hellooo
+  <div v-if="current_user">Hellooo {{current_user.name}}</div>
+  <div v-if="!current_user">Please log in</div>
 </template>
 
 <script>
 export default {
-  name: 'Home'
+  name: 'Home',
+  props: ['current_user'],
 }
 </script>
 
