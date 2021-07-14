@@ -1,44 +1,43 @@
 import axios from "axios";
 
-// Full config:  https://github.com/axios/axios#request-config
-let config = {
-  baseURL: process.env.apiUrl || "http://127.0.0.1:3000/api",
+const API_URL = process.env.API_URL || 'http://localhost:3000/api'
+
+const axiosInstance = axios.create({
+  baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
-    'client':       localStorage.client,
-    'uid':          localStorage.uid,
-    'access-token': localStorage.token,
-  },
-};
+    // 'client': {
+    //   toString() {
+    //     return localStorage.client;
+    //   }
+    // },
+    // 'uid': {
+    //   toString() {
+    //     return localStorage.uid;
+    //   }
+    // },
+    // 'access-token': {
+    //   toString() {
+    //     return localStorage.token;
+    //   }
+    // }
+  }
+});
 
-const _axios = axios.create(config);
+axiosInstance.interceptors.request.use(
+  config => {
+    const requestForOurAPI   = config.baseURL === API_URL,
+          accessHeadersUnset = !config.headers.common['access-token'];
 
-_axios.interceptors.request.use(
-  function(config) {
-    // Do something before request is sent
+    if (requestForOurAPI && accessHeadersUnset && localStorage.token) {
+      config.headers.common['client']       = localStorage.client;
+      config.headers.common['uid']          = localStorage.uid;
+      config.headers.common['access-token'] = localStorage.token;
+    }
+
     return config;
   },
-  function(error) {
-    // Do something with request error
-    return Promise.reject(error);
-  }
+  error => Promise.reject(error)
 );
 
-// Add a response interceptor
-_axios.interceptors.response.use(
-  function(response) {
-    // Do something with response data
-    return response;
-  },
-  function(error) {
-    // Do something with response error
-    // TODO: Log out if response is 401
-    return Promise.reject(error);
-  }
-);
-
-export default {
-  install: (app) => {
-    app.config.globalProperties.$http = _axios;
-  }
-}
+export default axiosInstance;
