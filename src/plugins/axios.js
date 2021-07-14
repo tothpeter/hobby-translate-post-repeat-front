@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Full config:  https://github.com/axios/axios#request-config
 let config = {
-  baseURL: process.env.apiUrl || "http://127.0.0.1:3000",
+  baseURL: process.env.apiUrl || "http://127.0.0.1:3000/api",
   headers: {
     'Content-Type': 'application/json',
     'client':       localStorage.client,
