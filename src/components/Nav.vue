@@ -16,7 +16,7 @@
       <div class="collapse navbar-collapse" v-if="current_user">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a href="#" class="nav-link">Logout</a>
+            <a href="javascript:void(0)" class="nav-link" @click="logout">Logout</a>
           </li>
         </ul>
       </div>
@@ -28,6 +28,17 @@
 export default {
   name: 'Nav',
   props: ['current_user'],
+  methods: {
+    async logout() {
+      try {
+        await this.$http.delete("/auth/sign_out");
+        this.$router.push('/');
+        this.$session.invalidate();
+      } catch (error) {
+        console.log('Error', error);
+      }
+    }
+  }
 }
 </script>
 

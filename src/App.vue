@@ -21,8 +21,10 @@ export default {
     };
   },
   async created() {
-    let response = await this.$http.get("/account");
-    this.current_user = response.data;
+    if (this.$session.isAuthenticated()) {
+      let response = await this.$http.get("/account");
+      this.current_user = response.data;
+    }
   },
 }
 </script>
