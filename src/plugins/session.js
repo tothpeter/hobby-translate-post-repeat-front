@@ -1,6 +1,8 @@
 export default {
   install: (app) => {
     app.config.globalProperties.$session = {
+      '$store': app.config.globalProperties.$store,
+
       isAuthenticated() {
         return localStorage.token !== undefined;
       },
@@ -13,12 +15,12 @@ export default {
 
       async logout() {
         await app.$http.delete("/auth/sign_out");
-        app.config.globalProperties.$store.dispatch("currentUser", null);
+        this.$store.dispatch("currentUser", null);
         this.invalidate();
       },
 
       activate(responseHeaders, user) {
-        app.config.globalProperties.$store.dispatch('currentUser', user);
+        this.$store.dispatch('currentUser', user);
 
         localStorage.client = responseHeaders['client'];
         localStorage.uid    = responseHeaders['uid'];
