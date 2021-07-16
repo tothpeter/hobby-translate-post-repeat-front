@@ -1,6 +1,9 @@
 <template>
   <form @submit.prevent="login">
     <h3>Login</h3>
+    <div class="alert alert-danger" role="alert" v-if="error">
+      {{error}}
+    </div>
 
     <div class="form-group">
       <label>Email</label>
@@ -21,6 +24,7 @@ export default {
   name: 'Login',
   data() {
     return {
+      error: '',
       credentials: {
         email:    'test1@test.com',
         password: '123123'
@@ -28,13 +32,13 @@ export default {
     };
   },
   methods: {
-    login() {
+    async login() {
       try {
-        this.$session.login(this.credentials);
+        this.error = '';
+        await this.$session.login(this.credentials);
         this.$router.push('/');
       } catch (error) {
-        console.log('Error');
-        console.log(error);
+        this.error = error.response.data.errors[0];
       }
     }
   }
