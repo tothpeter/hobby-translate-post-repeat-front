@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand navbar-light fixed-top bg-light">
     <div class="container">
       <router-link to="/" class="navbar-brand">Home</router-link>
-      <div class="collapse navbar-collapse" v-if="!current_user">
+      <div class="collapse navbar-collapse" v-if="!currentUser">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <router-link to="/login" class="nav-link">Login</router-link>
@@ -13,7 +13,7 @@
         </ul>
       </div>
 
-      <div class="collapse navbar-collapse" v-if="current_user">
+      <div class="collapse navbar-collapse" v-if="currentUser">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <a href="javascript:void(0)" class="nav-link" @click="logout">Logout</a>
@@ -31,7 +31,7 @@ export default {
   name: 'Nav',
   computed: {
     ...mapGetters([
-      'current_user',
+      'currentUser',
     ])
   },
   methods: {

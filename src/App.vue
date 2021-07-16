@@ -18,7 +18,7 @@ export default {
   async created() {
     if (this.$session.isAuthenticated()) {
       let response = await this.$http.get("/account");
-      this.$store.dispatch('current_user', response.data);
+      this.$store.dispatch('currentUser', response.data);
     }
   },
 }

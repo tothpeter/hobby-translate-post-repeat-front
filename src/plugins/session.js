@@ -13,16 +13,16 @@ export default {
 
       async logout() {
         await app.$http.delete("/auth/sign_out");
-        app.config.globalProperties.$store.dispatch("current_user", null);
+        app.config.globalProperties.$store.dispatch("currentUser", null);
         this.invalidate();
       },
 
-      activate(response_headers, user) {
-        app.config.globalProperties.$store.dispatch('current_user', user);
+      activate(responseHeaders, user) {
+        app.config.globalProperties.$store.dispatch('currentUser', user);
 
-        localStorage.client = response_headers['client'];
-        localStorage.uid    = response_headers['uid'];
-        localStorage.token  = response_headers['access-token'];
+        localStorage.client = responseHeaders['client'];
+        localStorage.uid    = responseHeaders['uid'];
+        localStorage.token  = responseHeaders['access-token'];
       },
 
       invalidate() {

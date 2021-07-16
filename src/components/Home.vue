@@ -1,6 +1,6 @@
 <template>
-  <div v-if="current_user">Hellooo {{current_user.name}}</div>
-  <div v-if="!current_user">Please log in</div>
+  <div v-if="currentUser">Hellooo {{currentUser.name}}</div>
+  <div v-if="!currentUser">Please log in</div>
 </template>
 
 <script>
@@ -10,7 +10,7 @@ export default {
   name: 'Home',
   computed: {
     ...mapGetters([
-      'current_user',
+      'currentUser',
     ])
   },
 }

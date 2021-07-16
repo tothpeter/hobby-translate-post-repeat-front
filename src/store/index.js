@@ -2,21 +2,21 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    current_user: null,
+    currentUser: null,
   },
   getters: {
-    current_user: (state) => {
-      return state.current_user;
+    currentUser: (state) => {
+      return state.currentUser;
     },
   },
   actions: {
-    current_user(context, user) {
-      context.commit('current_user', user)
+    currentUser(context, user) {
+      context.commit('currentUser', user)
     },
   },
   mutations: {
-    current_user(state, user) {
-      state.current_user = user;
+    currentUser(state, user) {
+      state.currentUser = user;
     },
   },
   modules: {
