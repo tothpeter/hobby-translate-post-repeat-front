@@ -35,11 +35,9 @@ export default {
     ])
   },
   methods: {
-    async logout() {
+    logout() {
       try {
-        await this.$http.delete("/auth/sign_out");
-        this.$store.dispatch('current_user', null);
-        this.$session.invalidate();
+        this.$session.logout();
         this.$router.push('/');
       } catch (error) {
         console.log('Error', error);
