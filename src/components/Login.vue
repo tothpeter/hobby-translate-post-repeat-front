@@ -21,21 +21,20 @@ export default {
   name: 'Login',
   data() {
     return {
+      // TODO: credentials: {email:, password:}
       email:    'test1@test.com',
       password: '123123',
     };
   },
   methods: {
-    async login() {
-      const login_params = {
+    login() {
+      const credentials = {
         email:    this.email,
         password: this.password,
       };
 
       try {
-        let response = await this.$http.post("/auth/sign_in", login_params);
-        this.$store.dispatch('current_user', response.data.data);
-        this.$session.activate(response.headers);
+        this.$session.login(credentials);
         this.$router.push('/');
       } catch (error) {
         console.log('Error');

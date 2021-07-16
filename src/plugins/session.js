@@ -5,7 +5,15 @@ export default {
         return localStorage.token !== undefined;
       },
 
-      activate(response_headers) {
+      async login(credentials) {
+        let response = await app.$http.post("/auth/sign_in", credentials);
+
+        this.activate(response.headers, response.data.data);
+      },
+
+      activate(response_headers, user) {
+        app.config.globalProperties.$store.dispatch('current_user', user);
+
         localStorage.client = response_headers['client'];
         localStorage.uid    = response_headers['uid'];
         localStorage.token  = response_headers['access-token'];
