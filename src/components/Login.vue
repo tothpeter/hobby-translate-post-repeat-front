@@ -4,12 +4,12 @@
 
     <div class="form-group">
       <label>Email</label>
-      <input type="email" class="form-control" v-model="email" placeholder="Email">
+      <input type="email" class="form-control" v-model="credentials.email" placeholder="Email">
     </div>
 
     <div class="form-group">
       <label>Password</label>
-      <input type="password" class="form-control" v-model="password" placeholder="Password">
+      <input type="password" class="form-control" v-model="credentials.password" placeholder="Password">
     </div>
 
     <button class="btn btn-primary btn-block">Login</button>
@@ -21,20 +21,16 @@ export default {
   name: 'Login',
   data() {
     return {
-      // TODO: credentials: {email:, password:}
-      email:    'test1@test.com',
-      password: '123123',
+      credentials: {
+        email:    'test1@test.com',
+        password: '123123'
+      }
     };
   },
   methods: {
     login() {
-      const credentials = {
-        email:    this.email,
-        password: this.password,
-      };
-
       try {
-        this.$session.login(credentials);
+        this.$session.login(this.credentials);
         this.$router.push('/');
       } catch (error) {
         console.log('Error');
