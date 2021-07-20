@@ -4,6 +4,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import Nav from './components/Nav.vue'
 
 export default {
@@ -11,8 +12,20 @@ export default {
   components: {
     Nav,
   },
+  methods: {
+    ...mapActions([
+      'fetchInstagramProfiles'
+    ]),
+  },
+  computed: {
+    ...mapGetters([
+      'instagramProfiles',
+    ])
+  },
   async created() {
     if (this.$session.isAuthenticated()) {
+      this.fetchInstagramProfiles();
+
       let response = await this.$http.get("/account");
       this.$store.dispatch('setCurrentUser', response.data);
     }
