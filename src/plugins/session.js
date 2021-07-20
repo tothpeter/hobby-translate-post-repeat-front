@@ -1,10 +1,14 @@
 export default {
+  isAuthenticated() {
+    return !!localStorage.token;
+  },
+
   install: (app) => {
     app.config.globalProperties.$session = {
       '$store': app.config.globalProperties.$store,
 
       isAuthenticated() {
-        return localStorage.token !== undefined;
+        return !!localStorage.token;
       },
 
       async login(credentials) {

@@ -5,6 +5,8 @@ import Login from '@/components/Login.vue'
 import Register from '@/components/Register.vue'
 import LatestFeed from '@/components/dashboard/LatestFeed.vue'
 
+import Session from '@/plugins/session.js'
+
 const routes = [
   { path: '/', component: Home },
   { path: '/login', component: Login },
@@ -15,6 +17,13 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.path.startsWith('/dashboard') && !Session.isAuthenticated()) {
+    next('/login')
+  }
+  else next()
 })
 
 export default router
