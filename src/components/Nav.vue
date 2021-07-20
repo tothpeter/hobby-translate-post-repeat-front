@@ -2,6 +2,14 @@
   <nav class="navbar navbar-expand navbar-light fixed-top bg-light">
     <div class="container">
       <router-link to="/" class="navbar-brand">Home</router-link>
+      <div class="collapse navbar-collapse" v-if="currentUser">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <router-link to="/dashboard/latest-feed" class="nav-link">Latest feed</router-link>
+          </li>
+        </ul>
+      </div>
+
       <div class="collapse navbar-collapse" v-if="!currentUser">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
