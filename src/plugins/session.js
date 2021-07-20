@@ -19,12 +19,12 @@ export default {
 
       async logout() {
         await app.$http.delete("/auth/sign_out");
-        this.$store.dispatch("currentUser", null);
+        this.$store.dispatch("setCurrentUser", null);
         this.invalidate();
       },
 
       activate(responseHeaders, user) {
-        this.$store.dispatch('currentUser', user);
+        this.$store.dispatch('setCurrentUser', user);
 
         localStorage.client = responseHeaders['client'];
         localStorage.uid    = responseHeaders['uid'];

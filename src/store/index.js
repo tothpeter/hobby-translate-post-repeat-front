@@ -10,12 +10,12 @@ export default createStore({
     },
   },
   actions: {
-    currentUser(context, user) {
-      context.commit('currentUser', user)
+    setCurrentUser(context, user) {
+      context.commit('setCurrentUser', user)
     },
   },
   mutations: {
-    currentUser(state, user) {
+    setCurrentUser(state, user) {
       state.currentUser = user;
     },
   },
