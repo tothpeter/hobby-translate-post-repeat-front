@@ -5,6 +5,16 @@
   class="instagram-profile">
     @{{ profile.user_name }}
   </div>
+
+  <div class="posts">
+    <div
+    v-for="post in posts" :key="post.id"
+    class="post">
+      <img :src="getPostImgUrl(post)">
+
+      {{ post.caption }}
+    </div>
+  </div>
 </template>
 
 <script>
@@ -15,6 +25,21 @@ export default {
     ...mapGetters([
       "instagramProfiles",
     ])
+  },
+  data() {
+    return {
+      posts: []
+    };
+  },
+  async created() {
+    let response = await this.$http.get('/instagram_posts/latest');
+    this.posts = response.data;
+  },
+  methods: {
+    getPostImgUrl(post) {
+      let encoded_image_url = encodeURIComponent(btoa(post.display_url_small))
+      return `http://localhost:3000/image-proxy/${encoded_image_url}`
+    }
   }
 }
 </script>
@@ -24,5 +49,21 @@ export default {
 .instagram-profile {
   display: inline-block;
   padding: 0 5px;
+}
+
+.posts {
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  grid-gap: 1rem;
+}
+
+.post {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.post img {
+  width: 100%;
 }
 </style>
